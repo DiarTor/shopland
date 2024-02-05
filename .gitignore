@@ -11,7 +11,7 @@ media
 *.bak 
 
 # User-specific stuff
-.idea
+.idea/
 # File-based project format
 *.iws
 
