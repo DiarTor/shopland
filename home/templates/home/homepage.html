@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    My Blog
+{% endblock %}
+
+{% block content %}
+    <header id="main-navigation">
+        <h1><a href="#">ShopLand Blog</a></h1>
+        <nav><a href="#">All Posts</a></nav>
+    </header>
+    <section id="welcome">
+        <header>
+            <img src="" alt="Author Of This Blog">
+            <h2>ShopLand Project</h2>
+        </header>
+        <p>Hi My Name Is DiarTor I'm A Programmer</p>
+    </section>
+    <section id="latest-post">
+        <h2>Latest Posts</h2>
+        <ul>
+            <li>
+                <article class="post">
+                    <a href="#">
+                        <img src="" alt="learning django">
+                        <div class="post__content">
+                            <h3>learning django</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo minus mollitia nam quis reprehenderit voluptas! Accusantium ad at consequatur, deleniti, id in inventore magnam minima nostrum repudiandae sapiente tempore totam?</p>
+                        </div>
+                    </a>
+                </article>
+            </li>
+        </ul>
+    </section>
+    <section id="about">
+    <h2>What id do</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consectetur cum deleniti dignissimos dolore eaque enim esse eveniet exercitationem fugit hic inventore iste itaque libero minus modi nisi optio perspiciatis quas, quasi quidem sapiente sint soluta tempora ullam unde velit!</p>
+    </section>
+{% endblock %}
