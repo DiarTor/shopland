@@ -9,7 +9,7 @@ def home(request):
 
 
 def posts(request):
-    pass
+    return render(request, 'home/all-posts.html')
 
 
 def single_post(request):
