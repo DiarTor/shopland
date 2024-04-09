@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
 
@@ -12,5 +11,5 @@ def posts(request):
     return render(request, 'home/all-posts.html')
 
 
-def single_post(request):
-    pass
+def single_post(request, slug):
+    return render(request, 'home/post-detail.html', {"slug": slug})
