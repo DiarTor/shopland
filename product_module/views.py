@@ -14,9 +14,5 @@ def product_list(request):
 
 
 def product_detail(request, slug):
-    # try:
-    #     product = Product.objects.get(id=product_id)
-    # except:
-    #     raise Http404("Product does not exist")
     product = get_object_or_404(Product, slug=slug)
     return render(request, 'product_module/product_detail.html', {"product": product})

@@ -6,7 +6,6 @@ from product_module.models import Product, ProductCategory, ProductInformation
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
-    # readonly_fields = ['slug']
     prepopulated_fields = {'slug': ['title']}
     list_display = ['title', 'price', 'short_description', 'rating', 'is_active', 'product_information', 'category']
     list_filter = ['is_active', 'rating']
