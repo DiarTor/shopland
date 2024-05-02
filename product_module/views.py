@@ -8,9 +8,8 @@ from product_module.models import Product
 def product_list(request):
     products = Product.objects.all().order_by('title')
     total_products = products.count()
-    avg_rating = products.aggregate(Avg('rating'))
     return render(request, 'product_module/product_list.html',
-                  {"products": products, "total_products": total_products, "avg_rating": avg_rating})
+                  {"products": products, "total_products": total_products})
 
 
 def product_detail(request, slug):
