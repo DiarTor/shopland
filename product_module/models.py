@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 
 
 # Create your models here.
@@ -19,12 +20,12 @@ class ProductCategory(models.Model):
 
 
 class ProductBrand(models.Model):
-    title = models.CharField(max_length=300, verbose_name="نام برند", db_index=True)
-    is_active = models.BooleanField(verbose_name="فعال/غیر فعال")
+    title = models.CharField(max_length=300, verbose_name='نام برند', db_index=True)
+    is_active = models.BooleanField(verbose_name='فعال / غیرفعال')
 
     class Meta:
         verbose_name = 'برند'
-        verbose_name_plural = 'برندها'
+        verbose_name_plural = 'برند ها'
 
     def __str__(self):
         return self.title
@@ -36,7 +37,7 @@ class Product(models.Model):
         ProductCategory,
         related_name='product_categories',
         verbose_name='دسته بندی ها')
-    brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, verbose_name='برند', blank=True, null=True)
+    brand = models.ForeignKey(ProductBrand, on_delete=models.CASCADE, verbose_name='برند', null=True, blank=True)
     price = models.IntegerField(verbose_name='قیمت')
     short_description = models.CharField(max_length=360, db_index=True, null=True, verbose_name='توضیحات کوتاه')
     description = models.TextField(verbose_name='توضیحات اصلی', db_index=True)

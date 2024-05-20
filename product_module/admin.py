@@ -1,12 +1,10 @@
 from django.contrib import admin
-
 from . import models
 
 
 # Register your models here.
 
 class ProductAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ("title",)}
     list_filter = ['category', 'is_active']
     list_display = ['title', 'price', 'is_active', 'is_delete']
     list_editable = ['price', 'is_active']

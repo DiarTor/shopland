@@ -1,12 +1,14 @@
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
-
-from .models import Product
+from .models import Product, ProductCategory
+from django.http import Http404
+from django.db.models import Avg, Min, Max
 
 
 # Create your views here.
 
 def product_list(request):
-    products = Product.objects.all().order_by('price')
+    products = Product.objects.all().order_by('-price')[:5]
     return render(request, 'product_module/product_list.html', {
         'products': products,
     })

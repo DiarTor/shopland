@@ -1,5 +1,6 @@
 from django.urls import path
-from contact_module.views import contact_us_page
+from . import views
+
 urlpatterns = [
-    path('', contact_us_page, name="contact_us_page")
+    path('', views.contact_us_page, name='contact_us_page')
 ]
