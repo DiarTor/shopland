@@ -1,16 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
-from django.views import View
 from django.views.generic.base import TemplateView
 
-
-# class HomeView(View):
-#     def get(self, request):
-#         context = {
-#             'data': 'this is data'
-#         }
-#         return render(request, 'home_module/index_page.html', context)
+from site_module.models import SiteSetting, FooterLinkBox, Slider
 
 
 class HomeView(TemplateView):
@@ -18,17 +10,36 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['data'] = 'this is data in home page'
-        context['message'] = 'this is message in home page'
+        sliders = Slider.objects.filter(is_active=True)
+        context['sliders'] = sliders
         return context
 
 
 def site_header_component(request):
+    setting: SiteSetting = SiteSetting.objects.filter(is_main_setting=True).first()
     context = {
-        'link': 'آموزش جنگو'
+        'site_setting': setting
     }
     return render(request, 'shared/site_header_component.html', context)
 
 
 def site_footer_component(request):
-    return render(request, 'shared/site_footer_component.html', {})
+    setting: SiteSetting = SiteSetting.objects.filter(is_main_setting=True).first()
+    footer_link_boxes = FooterLinkBox.objects.all()
+    for item in footer_link_boxes:
+        item.footerlink_set
+    context = {
+        'site_setting': setting,
+        'footer_link_boxes': footer_link_boxes
+    }
+    return render(request, 'shared/site_footer_component.html', context)
+
+
+class AboutView(TemplateView):
+    template_name = 'home_module/about_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+        site_setting: SiteSetting = SiteSetting.objects.filter(is_main_setting=True).first()
+        context['site_setting'] = site_setting
+        return context
