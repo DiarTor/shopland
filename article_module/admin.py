@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from article_module import models
+from . import models
 
 
 # Register your models here.
@@ -10,5 +9,10 @@ class ArticleCategoryAdmin(admin.ModelAdmin):
     list_editable = ['url_title', 'parent', 'is_active']
 
 
-admin.site.register(models.ArticleCategoryModel, ArticleCategoryAdmin)
-admin.site.register(models.ArticleModel)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ['title', 'slug', 'is_active']
+    list_editable = ['is_active']
+
+
+admin.site.register(models.ArticleCategory, ArticleCategoryAdmin)
+admin.site.register(models.Article, ArticleAdmin)

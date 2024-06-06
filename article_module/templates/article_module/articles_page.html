@@ -1,35 +1,61 @@
 {% extends 'shared/_layout.html' %}
 {% load thumbnail %}
 
-{% block title %}لیست محصولات{% endblock %}
+{% block title %}
+    لیست مقالات
+{% endblock %}
 
 {% block content %}
     <section>
         <div class="container">
             <div class="row">
 
-                <div class="col-sm-9 padding-right">
-                    <div class="features_items"><!--features_items-->
-                        <h2 class="title text-center">محصولات عمده</h2>
-                        {% for product in products %}
-                            {% include 'includes/product_item_partial.html' with product=product %}
-                        {% endfor %}
-                        <div class="clearfix"></div>
-                        <ul class="pagination">
-                            {% if page_obj.has_previous %}
-                                <li><a href="?page={{ page_obj.previous_page_number }}">قبلی</a></li>
-                            {% endif %}
-                            {% for pageNumber in paginator.page_range %}
-                                <li class="{% if page_obj.number == pageNumber %} active {% endif %}">
-                                    <a href="?page={{ pageNumber }}">{{ pageNumber }}</a>
-                                </li>
-                            {% endfor %}
-                            {% if page_obj.has_next %}
-                                <li><a href="?page={{ page_obj.next_page_number }}">بعدی</a></li>
-                            {% endif %}
+                <div class="col-sm-9">
+                    <div class="blog-post-area">
+                        <h2 class="title text-center">آخریـن اخبـار</h2>
 
-                        </ul>
-                    </div><!--features_items-->
+
+                        {% for article in object_list %}
+                            <div class="single-blog-post">
+                                <h3>{{ article.title }}</h3>
+                                <div class="post-meta">
+                                    <ul>
+                                        <li><i class="fa fa-user"></i> کاربـر 1</li>
+                                        <li><i class="fa fa-clock-o"></i> 17:20 ب.ظ</li>
+                                        <li><i class="fa fa-calendar"></i> 28 تیـر 1397</li>
+                                    </ul>
+                                    <span>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half-o"></i>
+								</span>
+                                </div>
+                                <a href="">
+                                    {#<img src="{{ article.image.url }}" alt="">#}
+
+                                    {% thumbnail article.image "862x398" quality=95 crop='center' as im %}
+                                        <img src="{{ im.url }}">
+                                    {% endthumbnail %}
+                                </a>
+                                <p>
+                                    {{ article.short_description }}
+                                </p>
+                                <a class="btn btn-primary" href="">ادامـه مطلب</a>
+                            </div>
+                        {% endfor %}
+
+
+                        <div class="pagination-area">
+                            <ul class="pagination">
+                                <li><a href="" class="active">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">3</a></li>
+                                <li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-sm-3">

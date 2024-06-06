@@ -2,11 +2,12 @@ from django.db import models
 
 
 # Create your models here.
-class ArticleCategoryModel(models.Model):
-    parent = models.ForeignKey('ArticleCategoryModel', null=True, blank=True, on_delete=models.CASCADE,
+
+class ArticleCategory(models.Model):
+    parent = models.ForeignKey('ArticleCategory', null=True, blank=True, on_delete=models.CASCADE,
                                verbose_name='دسته بندی والد')
     title = models.CharField(max_length=200, verbose_name='عنوان دسته بندی')
-    url_title = models.CharField(max_length=200, unique=True, verbose_name='عنوان در لینک')
+    url_title = models.CharField(max_length=200, unique=True, verbose_name='عنوان در url')
     is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
 
     def __str__(self):
@@ -17,14 +18,14 @@ class ArticleCategoryModel(models.Model):
         verbose_name_plural = 'دسته بندی های مقاله'
 
 
-class ArticleModel(models.Model):
+class Article(models.Model):
     title = models.CharField(max_length=300, verbose_name='عنوان مقاله')
-    slug = models.SlugField(max_length=400, db_index=True, allow_unicode=True, verbose_name='عنوان در لینک')
+    slug = models.SlugField(max_length=400, db_index=True, allow_unicode=True, verbose_name='عنوان در url')
     image = models.ImageField(upload_to='images/articles', verbose_name='تصویر مقاله')
     short_description = models.TextField(verbose_name='توضیحات کوتاه')
     text = models.TextField(verbose_name='متن مقاله')
     is_active = models.BooleanField(default=True, verbose_name='فعال / غیرفعال')
-    selected_categories = models.ManyToManyField(ArticleCategoryModel, verbose_name='دسته بندی ها')
+    selected_categories = models.ManyToManyField(ArticleCategory, verbose_name='دسته بندی ها')
 
     def __str__(self):
         return self.title
