@@ -42,9 +42,15 @@ INSTALLED_APPS = [
     'contact_module',
     'site_module',
     'article_module',
+    'user_panel_module',
+    'order_module',
+    'admin_panel',
+    'polls',
     # external apps
     'django_render_partial',
-    'sorl.thumbnail'
+    'sorl.thumbnail',
+    'jalali_date',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -82,6 +88,7 @@ WSGI_APPLICATION = 'shopland.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 AUTH_USER_MODEL = 'account_module.User'
+LOGIN_URL = '/login'
 
 DATABASES = {
     'default': {
@@ -144,3 +151,28 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'onionarchitecturemvc@gmail.com'
 EMAIL_HOST_PASSWORD = 'djangotoplearn@pass'
 EMAIL_PORT = 587
+
+# default settings
+JALALI_DATE_DEFAULTS = {
+    'Strftime': {
+        'date': '%y/%m/%d',
+        'datetime': '%H:%M:%S _ %y/%m/%d',
+    },
+    'Static': {
+        'js': [
+            # loading datepicker
+            'admin_panel/js/django_jalali.min.js',
+            # OR
+            # 'admin_panel/jquery.ui.datepicker.jalali/scripts/jquery.ui.core.js',
+            # 'admin_panel/jquery.ui.datepicker.jalali/scripts/calendar.js',
+            # 'admin_panel/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc.js',
+            # 'admin_panel/jquery.ui.datepicker.jalali/scripts/jquery.ui.datepicker-cc-fa.js',
+            # 'admin_panel/js/main.js',
+        ],
+        'css': {
+            'all': [
+                'admin_panel/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css',
+            ]
+        }
+    },
+}
